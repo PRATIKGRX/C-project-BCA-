@@ -136,9 +136,6 @@ void main();
 int adminLogin();
 int teacherLogin();
 int studentLogin();
-
-void loginMenu();
-
 int validateAdmin(char username[], char password[]);
 int validateTeacher(char username[], char password[]);
 int validateStudent(char username[], char password[]);
