@@ -1,12 +1,18 @@
 #include<stdio.h>
 #include<string.h>
+#include <stdlib.h>
+#include <windows.h>
 #include "teacher.h"
 
 void teachersmenu() {
     while (1) 
     {
+        system("cls");
         int choice;
-        printf("\n===== TEACHER MENU =====\n");
+        printf("\n-----------------------------------\n");
+        printf("           Teacher's Menu:           ");
+        printf("\n-----------------------------------\n\n");
+    
         printf("1. View Profile\n");
         printf("2. Edit Profile\n");
         printf("3. Edit Grades\n");
@@ -42,10 +48,13 @@ void teachersmenu() {
                  handleReports();
                     printf("Handling reports...\n");
                 break;
+            case 6:
+                printf("Logging out...\n");
+                processing();
+                return;
 
             default:
             invalidChoice();
-            printf("Invalid Choice!\n");
             getchar();
             break;
       

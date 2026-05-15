@@ -1,11 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
 #include "teacher.h"
 
-int main() {
-    int choice;
+void teacherslogin() {
+   
     while (1) {
-        printf("===== SCHOOL MANAGEMENT SYSTEM =====\n\n");
-        printf("========== Teacher's Login:=========\n");
+        system("cls");
+        int choice;
+        printf("\n===================================\n");
+        printf("       SCHOOL MANAGEMENT SYSTEM       ");
+        printf("\n===================================\n");
+
+        printf("----------------------------------\n");
+        printf("           Teacher's Login:          ");
+        printf("\n----------------------------------\n\n");
+
         printf("1. Login\n");
         printf("2. Create New Account\n");
         printf("3. Exit\n\n");
@@ -14,21 +24,143 @@ int main() {
 
         if (choice == 1) {
             printf("Login selected\n\n");
-             teachersmenu();
+            processing();  
+            login();
               break;
         }
         else if (choice == 2) {
             printf("Create New Account selected\n\n");
+            processing();  
+            teachersaccount();
+            break;
         }
         else if (choice == 3) {
             printf("Exiting...\n");
-            break;
+            processing();  
+            return;
         }
         else {
             printf("Invalid choice!!\n\n");
-             break;
+            return;
         }
     }
-    return 0;
 
 }
+
+
+//--------------------------------------------------------  LOGIN  ---------------------------------------------------------------------
+
+void login(){
+  system("cls");
+  printf("\n----------------------------------\n");
+  printf("                Login:               ");
+  printf("\n----------------------------------\n\n");
+
+  int ID;
+  char password[20];
+  char name[50];
+  char subject[50];
+  char email[50];
+  char contact[40];
+
+  int enterid; 
+  char enterpassword[20];
+
+  printf("Enter ID: ");
+  scanf("%d", &enterid);
+
+  printf("Enter Password: ");
+  scanf("%s", enterpassword);
+
+  FILE *fp;
+    fp = fopen("teachers.txt", "r");
+
+    if (fp == NULL) {
+        printf("File cannot open!\n");
+        return;
+    }
+    
+    while (fscanf(fp, "%d %s %s %s %s %s", &ID, password, name, subject, email, contact) == 6) {
+        if (enterid == ID && strcmp(enterpassword, password) == 0) {
+            printf("Login successful!\n");
+            fclose(fp);
+            processing();  
+            teachersmenu();
+            return;
+        }
+    }
+     fclose(fp);
+    printf("Invalid ID or password!\n");
+
+    printf("Press Enter to try again...");
+    getchar();
+    getchar(); 
+
+}
+
+
+//--------------------------------------------------------  CREATE TEACHER'S ACCOUNT ---------------------------------------------------------
+
+void teachersaccount() {
+    while (1) {
+        system("cls");
+
+        printf("\n----------------------------------\n");
+        printf("          Create New Account:         ");
+        printf("\n----------------------------------\n\n");
+    struct Teacher {
+        int ID;
+        char username[50];
+        char password[50];
+        char email[100];
+        char subject[50];
+        char contact[40];
+    };
+
+    struct Teacher t;
+    FILE *fp;
+    fp = fopen("teachers.txt", "a");
+
+    if (fp == NULL) {
+        printf("File cannot open!\n");
+        return;
+    }
+
+    printf("Enter Teacher ID: ");
+    scanf("%d", &t.ID);
+
+    printf("Enter Username: ");
+    scanf("%s", t.username);
+
+    printf("Enter Password: ");
+    scanf("%s", t.password);
+
+    printf("Enter Email: ");
+    scanf("%s", t.email);
+
+    printf("Enter Subject: ");
+    scanf("%s", t.subject);
+
+    printf("Enter Contact: ");
+    scanf("%s", t.contact);
+
+    fprintf(fp, "%d %s %s %s %s %s\n",
+            t.ID,
+            t.username,
+            t.password,
+            t.email,
+            t.subject,
+            t.contact);
+
+    fclose(fp);
+
+    printf("Account created successfully!\n");
+
+    printf("Press Enter to continue...");
+    getchar();
+    getchar();
+    return;
+}
+}
+
+//---------------------------------------------------------- EXIT -----------------------------------------------------------------------

@@ -1,5 +1,6 @@
 // teacher.c
 #include <stdio.h>
+#include <windows.h>
 #include "teacher.h"
 
 void viewProfile() {
@@ -27,4 +28,15 @@ void invalidChoice() {
     printf("Press Enter to try Again.");
     getchar();
     getchar();
+}
+
+void processing() {
+    printf("Processing");
+
+    for (int i = 0; i < 10; i++) {
+        printf(">");
+        fflush(stdout);
+        Sleep(500);  
+    }
+    printf("\n");
 }
