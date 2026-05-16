@@ -5,13 +5,24 @@ void teacherslogin();
 void login();
 void teachersaccount();
 
-void teachersmenu();
-    void viewProfile();
-    void editProfile();
-    void addGrades();
-    void editGrades();
-    void handleReports();
-    void invalidChoice();
-    void processing();
+// void teachersmenu();
+//     void viewteacherProfile();
+//     void editProfile();
+//     void addGrades();
+//     void viewstudents();
+//     void viewgrades();
+//     void handleReports();
+//     void invalidChoice();
+//     void processing();
 
+    void teachersmenu();
+    void viewTeacherProfile();
+    void editTeacherProfile();
+    void addGrades();
+    void handleReports();
+    void viewStudents();
+    void teacherViewGrades();
+    void changeTeacherPassword();
+    void processing();
+    void invalidChoice();    
 #endif

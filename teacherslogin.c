@@ -1,7 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <windows.h>
 #include "teacher.h"
+
+struct Teacher {
+        int ID;
+        char username[50];
+        char password[50];
+        char email[100];
+        char subject[50];
+        char address[100];
+        char contact[40];
+    };
+     
 
 void teacherslogin() {
    
@@ -37,11 +49,10 @@ void teacherslogin() {
         else if (choice == 3) {
             printf("Exiting...\n");
             processing();  
-            return;
+            
         }
         else {
-            printf("Invalid choice!!\n\n");
-            return;
+            invalidChoice();
         }
     }
 
@@ -56,13 +67,7 @@ void login(){
   printf("                Login:               ");
   printf("\n----------------------------------\n\n");
 
-  int ID;
-  char password[20];
-  char name[50];
-  char subject[50];
-  char email[50];
-  char contact[40];
-
+  struct Teacher t;
   int enterid; 
   char enterpassword[20];
 
@@ -80,27 +85,34 @@ void login(){
         return;
     }
     
-    while (fscanf(fp, "%d %s %s %s %s %s", &ID, password, name, subject, email, contact) == 6) {
-        if (enterid == ID && strcmp(enterpassword, password) == 0) {
-            printf("Login successful!\n");
-            fclose(fp);
-            processing();  
-            teachersmenu();
-            return;
-        }
+    while (fscanf(fp, "%d %s %s %s %s %s %s", 
+                    &t.ID, 
+                    t.username, 
+                    t.password, 
+                    t.subject, t
+                    .email, 
+                    t.address, 
+                    t.contact) == 7)  {
+
+                if (enterid == t.ID && strcmp(enterpassword, t.password) == 0) {
+                    printf("Login successful!\n");
+                    fclose(fp);
+                    processing();  
+                    teachersmenu();
+                    return;
+                    
+                }
     }
      fclose(fp);
     printf("Invalid ID or password!\n");
-
-    printf("Press Enter to try again...");
-    getchar();
-    getchar(); 
+    invalidChoice();
 
 }
 
 
 //--------------------------------------------------------  CREATE TEACHER'S ACCOUNT ---------------------------------------------------------
 
+   
 void teachersaccount() {
     while (1) {
         system("cls");
@@ -108,15 +120,7 @@ void teachersaccount() {
         printf("\n----------------------------------\n");
         printf("          Create New Account:         ");
         printf("\n----------------------------------\n\n");
-    struct Teacher {
-        int ID;
-        char username[50];
-        char password[50];
-        char email[100];
-        char subject[50];
-        char contact[40];
-    };
-
+ 
     struct Teacher t;
     FILE *fp;
     fp = fopen("teachers.txt", "a");
@@ -141,15 +145,19 @@ void teachersaccount() {
     printf("Enter Subject: ");
     scanf("%s", t.subject);
 
+    printf("Enter Address: ");
+    scanf("%s", t.address);
+
     printf("Enter Contact: ");
     scanf("%s", t.contact);
 
-    fprintf(fp, "%d %s %s %s %s %s\n",
+    fprintf(fp, "%d %s %s %s %s %s %s\n",
             t.ID,
             t.username,
             t.password,
             t.email,
             t.subject,
+            t.address,
             t.contact);
 
     fclose(fp);
