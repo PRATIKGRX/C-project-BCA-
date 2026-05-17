@@ -47,7 +47,7 @@ void changePassword()
     char savedPassword[30] = "Admin@123";
     printf("Enter old password: ");
     scanf("%s", oldPassword);
-    if(!verifyOldPassword())
+    if(!verifyOldPassword(oldPassword,savedPassword))
     {
         printf("Incorrect old password\n");
         return;
